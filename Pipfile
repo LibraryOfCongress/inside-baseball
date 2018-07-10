@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+csvkit = "*"
+datasette = "*"
+requests = "*"
+
+[dev-packages]
+black = "*"
+isort = "*"
+"flake8" = "*"
+rope = "*"
+
+[requires]
+python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true
