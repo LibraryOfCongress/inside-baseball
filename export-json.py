@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
-import re
-import os
-import sqlite3
 import json
+import os
+import re
+import sqlite3
 import sys
+
+import dateparser
 
 
 def export_items_as_geojson(db_file, output_file):
@@ -117,10 +119,84 @@ def export_item(db, item):
     else:
         title = display_titles[0]
 
-    return (
-        [{"title": v, "latlng": k} for k, v in all_coords.items()],
-        {"title": title, "metadata": metadata, "id": str(metadata.pop("rowid"))},
-    )
+    item_properties = {
+        "title": title,
+        "metadata": metadata,
+        "id": str(metadata.pop("rowid")),
+    }
+
+    extracted_dates = extract_dates(metadata.get("Date"))
+    if extracted_dates:
+        item_properties["startYear"] = int(extracted_dates[0])
+        item_properties["endYear"] = int(extracted_dates[1])
+
+    return ([{"title": v, "latlng": k} for k, v in all_coords.items()], item_properties)
+
+
+def extract_dates(raw_input):
+    if not raw_input:
+        return
+
+    d = raw_input.strip()
+
+    d = re.sub(r"^(?:ca?.|early)\s*", "", d)
+    d = re.sub(r"(; (printed|used|scanned) .*$)", "", d)
+
+    if re.match(r'^"?\w+\s+(|\d+,\s+)\d{4}"?$', d):
+        date = dateparser.parse(d, languages=["en"])
+        if date:
+            return date.year, date.year
+
+    start_year = end_year = None
+
+    if "-" not in d:
+        guess = guess_years_from_date_string(d)
+        if guess:
+            start_year, end_year = guess
+    else:
+        chunks = re.split("\s*-\s*", d, maxsplit=1)
+
+        for guess in map(guess_years_from_date_string, chunks):
+            if not guess:
+                continue
+
+            if guess[0] and (not start_year or start_year > guess[0]):
+                start_year = guess[0]
+
+            if guess[1] and (not end_year or end_year < guess[1]):
+                end_year = guess[1]
+
+    if not start_year:
+        m = re.search(r"(\d{4})", d)
+        if m:
+            start_year = m.group(1)
+
+    if not start_year:
+        print(f"Unable to parse a date from {raw_input}", file=sys.stderr)
+
+    if not end_year:
+        end_year = start_year
+
+    return start_year, end_year
+
+
+DATE_RE = re.compile(r"^(\d{4})$")
+DATE_RANGE_RE = re.compile(r"^(\d{4})-(\d{4})$")
+DECADE_RE = re.compile(r"^(\d{4})s$")
+
+
+def guess_years_from_date_string(d):
+    m = DATE_RE.match(d)
+    if m:
+        return m.group(1), m.group(1)
+
+    m = DATE_RANGE_RE.match(d)
+    if m:
+        return m.group(1), m.group(2)
+
+    m = DECADE_RE.match(d)
+    if m:
+        return m.group(1), "%s9" % m.group(1)[0:3]
 
 
 if __name__ == "__main__":
