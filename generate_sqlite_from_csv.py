@@ -13,6 +13,7 @@ from csvs_to_sqlite.utils import (
     refactor_dataframes,
     table_exists,
     to_sql_with_foreign_keys,
+    drop_table,
 )
 
 
@@ -32,6 +33,7 @@ def convert_csv_to_sqlite(csv_filename):
             print("Could not load {}: {}".format(path, e), file=sys.stderr)
 
     print("Loaded {} dataframes".format(len(dataframes)))
+    assert len(dataframes) == 1
 
     # Use extract_columns to build a column:(table,label) dictionary
     foreign_keys = {}
@@ -46,25 +48,21 @@ def convert_csv_to_sqlite(csv_filename):
         (re.compile(r"Geography(?:|_\d+)"), "Geography"),
     ]
 
-    assert len(dataframes) == 1
-
     for column_name in dataframes[0].columns:
         for regex, mapped in column_map:
             if regex.search(column_name):
                 foreign_keys[column_name] = (mapped, "value")
 
     # Now we have loaded the dataframes, we can refactor them
-    created_tables = {}
     refactored = refactor_dataframes(conn, dataframes, foreign_keys)
 
     for df in refactored:
         # This is a bit trickier because we need to
         # create the table with extra SQL for foreign keys
         if table_exists(conn, df.table_name):
-            df.to_sql(df.table_name, conn, if_exists="append", index=False)
-        else:
-            to_sql_with_foreign_keys(conn, df, df.table_name, foreign_keys)
-            created_tables[df.table_name] = df
+            drop_table(conn, df.table_name)
+
+        to_sql_with_foreign_keys(conn, df, df.table_name, foreign_keys)
 
     conn.close()
 
