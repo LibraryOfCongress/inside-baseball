@@ -119,7 +119,7 @@ def export_item(db, item):
 
     return (
         [{"title": v, "latlng": k} for k, v in all_coords.items()],
-        {"title": title, "metadata": metadata, "id": metadata["rowid"]},
+        {"title": title, "metadata": metadata, "id": str(metadata.pop("rowid"))},
     )
 
 
