@@ -146,6 +146,10 @@ function updateItemPreview(item) {
 
     let tbody = $(".metadata-table tbody", preview);
     for (let [field, value] of Object.entries(item.metadata)) {
+        if (field == "Description" || !value || value.length < 1) {
+            continue;
+        }
+
         let row = document.createElement("tr");
 
         let th = document.createElement("th");
