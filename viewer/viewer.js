@@ -123,8 +123,40 @@ function displayItems(itemIDs) {
         itemLink.href = meta["Digital ID URL"];
         itemLink.target = "_blank";
 
+        itemLink.addEventListener("click", evt => {
+            updateItemPreview(item);
+            jQuery("#viewer-item-preview").modal();
+            evt.preventDefault();
+            evt.stopPropagation();
+            return false;
+        });
+
         itemContainer.appendChild(itemLink);
     });
+}
+
+function updateItemPreview(item) {
+    let preview = $("#viewer-item-preview");
+    $$(".title", preview).forEach(elem => (elem.textContent = item.title));
+    $(".description", preview).textContent = item.metadata.Description;
+
+    $$("a", preview).forEach(link => (link.href = item.metadata["Digital ID URL"]));
+
+    let tbody = $(".metadata-table tbody", preview);
+    for (let [field, value] of Object.entries(item.metadata)) {
+        let row = document.createElement("tr");
+
+        let th = document.createElement("th");
+        th.scope = "row";
+        th.textContent = field;
+        row.appendChild(th);
+
+        let td = document.createElement("td");
+        td.textContent = value;
+        row.appendChild(td);
+
+        tbody.appendChild(row);
+    }
 }
 
 function getVisibleItems() {
