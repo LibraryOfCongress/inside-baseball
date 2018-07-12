@@ -1,4 +1,4 @@
-#Inside Baseball: Baseball Collections as Data Event Background#   
+# Inside Baseball: Baseball Collections as Data Event Background #   
 
 LC Labs, Jstor Labs, and the National Museum of African American History and Culture collaborated on Inside Baseball Week (7/9/2018-7/13/2018), an exercise in user-centered design rapid-prototyping to create applications to access baseball digital collections across our cultural heritage organizations.   
 
@@ -9,10 +9,10 @@ The LC Labs team and the Jstor Labs team publicly presented their applications a
 We’d like to thank first and foremost our data divinator, visiting Archivist Julia Hickey, our Library of Congress team members Griff Friedman, UX Designer, Chris Adams, LC Information Technology Specialist, Meghan Ferriter, Abbey Potter, and Jaime Mears of LC Labs, and our amazing support crew: Junior Fellows Eileen Jakeaway and Courtney Johnson, HACU Intern Yassira Sueiras, and UVA Fellow Erin Dlott.   
 We’d also like to thank our fearless leader, Jstor Labs facilitator Beth Dufford.   
 
-##Repo Content##   
+## Repo Content ##
 You will find the following in this repo:   
-*“Mapping an American Pastime” application
-*Data sets including datasette (SQLite) json and csv exports
-*Documentation and diagrams on data provenance, decisions, transformations
-*Wireframes
+* “Mapping an American Pastime” application
+* Data sets including datasette (SQLite) json and csv exports
+* Documentation and diagrams on data provenance, decisions, transformations
+* Wireframes
 
