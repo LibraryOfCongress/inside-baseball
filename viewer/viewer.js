@@ -53,6 +53,20 @@ fetch("InsideBaseball.json")
                 })
                 .addTo(itemLayer);
         });
+
+        Object.values(allItems).forEach(v => {
+            let searchText = [v.title];
+            for (let value of Object.values(v.metadata)) {
+                if (Array.isArray(value)) {
+                    value.forEach(val => searchText.push(val));
+                } else {
+                    searchText.push(value);
+                }
+            }
+            v.searchText = searchText.join("\n").toLocaleLowerCase();
+        });
+
+        displayItems(Object.values(allItems).map(v => v.id));
     });
 
 fetch(
@@ -92,7 +106,9 @@ function displayItems(itemIDs) {
         let meta = item.metadata;
 
         let itemContainer = document.createElement("li");
-        itemContainer.classList.add("list-group-item");
+        itemContainer.classList.add("list-group-item", "item-listing");
+        itemContainer.id = "item-" + itemID;
+        itemContainer.dataset.itemID = itemID;
         itemListing.appendChild(itemContainer);
 
         let itemLink = document.createElement("a");
@@ -103,3 +119,29 @@ function displayItems(itemIDs) {
         itemContainer.appendChild(itemLink);
     });
 }
+
+function getVisibleItems() {
+    // Apply search text filters:
+    let searchText = textSearchInput.value.trim().toLocaleLowerCase();
+    let visibleItems = Object.values(allItems)
+        .filter(item => item.searchText.indexOf(searchText) > -1)
+        .map(item => item.id);
+
+    return visibleItems;
+}
+
+function applyVisibilityFilters() {
+    let visibleItemIDs = getVisibleItems();
+
+    $$(".item-listing", itemListing).forEach(node => {
+        node.classList.toggle(
+            "hidden",
+            visibleItemIDs.indexOf(node.dataset.itemID) < 0
+        );
+    });
+}
+
+let textSearchInput = $("#item-text-search");
+textSearchInput.addEventListener("input", evt => {
+    applyVisibilityFilters();
+});

@@ -40,3 +40,7 @@ main > * {
 .leaflet-popup-content h1 {
     font-size: larger;
 }
+
+.hidden {
+    display: none;
+}
