@@ -33,6 +33,8 @@ main > * {
 #viewer-items {
     flex-basis: 40%;
     max-width: 40em;
+
+    overflow-y: auto;
 }
 
 .leaflet-popup-content h1 {
