@@ -18,8 +18,12 @@ InsideBaseball.sqlite: InsideBaseball.csv
 geocode: InsideBaseball.sqlite
 	pipenv run python geocode-locations.py InsideBaseball.sqlite
 
-export: InsideBaseball.sqlite geocode
+export: geocode
 	pipenv run python export-json.py InsideBaseball.sqlite
+	mv InsideBaseball.json viewer/
 
-server: InsideBaseball.sqlite geocode
+server: geocode
 	pipenv run datasette serve InsideBaseball.sqlite
+
+publish: geocode
+	pipenv run datasette publish now --install=datasette-vega --install=datasette-cluster-map InsideBaseball.sqlite
