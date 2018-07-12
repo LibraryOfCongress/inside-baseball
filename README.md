@@ -1,4 +1,4 @@
-# Inside Baseball: Baseball Collections as Data Event Background #   
+# Inside Baseball: Baseball Collections as Data Event Background #
 
 LC Labs, Jstor Labs, and the National Museum of African American History and Culture collaborated on Inside Baseball Week (7/9/2018-7/13/2018), an exercise in user-centered design rapid-prototyping to create applications to access baseball digital collections across our cultural heritage organizations.   
 
