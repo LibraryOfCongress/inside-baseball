@@ -30,7 +30,8 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-let itemLayer = L.layerGroup().addTo(map);
+let placeLayer = L.featureGroup().addTo(map);
+let allPlaceMarkers = [];
 
 fetch("InsideBaseball.json")
     .then(response => {
@@ -43,15 +44,18 @@ fetch("InsideBaseball.json")
         allPoints.forEach(point => {
             let title = point.title || JSON.stringify(point.latlng);
 
-            L.marker(point.latlng, {
+            let marker = L.marker(point.latlng, {
                 title: title,
                 items: point.items
-            })
-                .bindPopup(title)
-                .on("click", function(evt) {
-                    displayItems(evt.target.options.items);
-                })
-                .addTo(itemLayer);
+            });
+
+            marker.bindPopup(title);
+            marker.on("click", function(evt) {
+                displayItems(evt.target.options.items);
+            });
+
+            marker.addTo(placeLayer);
+            allPlaceMarkers.push(marker);
         });
 
         Object.values(allItems).forEach(v => {
@@ -139,7 +143,28 @@ function applyVisibilityFilters() {
             visibleItemIDs.indexOf(node.dataset.itemID) < 0
         );
     });
+
+    applyMapVisibilityFilter(visibleItemIDs);
 }
+
+function applyMapVisibilityFilter(visibleItemIDs) {
+    // Iterate over the points to see which one has at least one visible item
+
+    let visibleIDSet = new Set(visibleItemIDs);
+
+    allPlaceMarkers.forEach(marker => {
+        let isVisible =
+            marker.options.items.filter(i => visibleIDSet.has(i)).length > 0;
+
+        if (isVisible) {
+            placeLayer.addLayer(marker);
+        } else {
+            placeLayer.removeLayer(marker);
+        }
+    });
+}
+
+//     map.fitBounds(placeLayer.getBounds(), { animate: true });
 
 let textSearchInput = $("#item-text-search");
 textSearchInput.addEventListener("input", evt => {
