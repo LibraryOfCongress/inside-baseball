@@ -187,10 +187,6 @@ function createSlider(element) {
             min: startYear,
             max: endYear
         },
-        pips: {
-            mode: "range",
-            density: 3
-        },
         format: {
             to: function(value) {
                 return value.toFixed(0);
@@ -198,7 +194,14 @@ function createSlider(element) {
             from: function(value) {
                 return parseInt(value, 10);
             }
-        }
+        },
+        pips: {
+            mode: "count",
+            values: 6,
+            density: 10
+        },
+        behaviour: "drag",
+        connect: true
     });
 
     let labels = [
