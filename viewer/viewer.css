@@ -1,39 +1,38 @@
 main {
     padding: 5rem 1.5rem;
-    text-align: center;
 }
 
-main { 
-    display: flex; 
+main {
+    display: flex;
     flex-wrap: wrap;
-    
+
     outline: solid red 1px;
-    
+
     height: calc(100vh - 80px);
-    
+
     margin-top: 60px;
 }
 
 main > * {
     flex: 1 1 50%;
-    
+
     outline: dotted #ccc 1px;
-    
+
     padding: 1rem;
-    
+
     height: calc(100% - 140px);
 }
 
-#viewer-timeline
-{
+#viewer-filters {
     flex-basis: 100%;
     flex-shrink: 0;
-    
+
     height: 120px;
 }
 
 #viewer-items {
-    max-width: 30em;
+    flex-basis: 40%;
+    max-width: 40em;
 }
 
 .leaflet-popup-content h1 {
