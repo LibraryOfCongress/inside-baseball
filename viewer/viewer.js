@@ -12,7 +12,10 @@ function removeChildren(element) {
     }
 }
 
-let allPoints, allItems;
+let allPoints,
+    allItems,
+    startYear = 1860,
+    endYear = 2018;
 
 let baseballIcon = L.icon({
     iconUrl: "static/icons/baseball-ball-solid.svg",
@@ -127,14 +130,20 @@ function displayItems(itemIDs) {
 function getVisibleItems() {
     // Apply search text filters:
     let searchText = textSearchInput.value.trim().toLocaleLowerCase();
+
     let visibleItems = Object.values(allItems)
         .filter(item => item.searchText.indexOf(searchText) > -1)
+        .filter(item => item.startYear >= startYear && item.endYear <= endYear)
         .map(item => item.id);
 
     return visibleItems;
 }
 
 function applyVisibilityFilters() {
+    if (!allItems) {
+        return;
+    }
+
     let visibleItemIDs = getVisibleItems();
 
     $$(".item-listing", itemListing).forEach(node => {
@@ -170,3 +179,41 @@ let textSearchInput = $("#item-text-search");
 textSearchInput.addEventListener("input", evt => {
     applyVisibilityFilters();
 });
+
+function createSlider(element) {
+    noUiSlider.create(slider, {
+        start: [startYear, endYear],
+        range: {
+            min: startYear,
+            max: endYear
+        },
+        pips: {
+            mode: "range",
+            density: 3
+        },
+        format: {
+            to: function(value) {
+                return value.toFixed(0);
+            },
+            from: function(value) {
+                return parseInt(value, 10);
+            }
+        }
+    });
+
+    let labels = [
+        slider.querySelector('.noUi-handle[data-handle="0"]'),
+        slider.querySelector('.noUi-handle[data-handle="1"]')
+    ];
+
+    slider.noUiSlider.on("update", (values, handle, unencoded) => {
+        labels[handle].innerText = values[handle];
+
+        startYear = Math.floor(parseInt(values[0], 10) - 1);
+        endYear = Math.ceil(parseInt(values[1], 10) + 1);
+
+        applyVisibilityFilters();
+    });
+}
+
+createSlider($("#slider"));

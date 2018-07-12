@@ -6,11 +6,7 @@ main {
     display: flex;
     flex-wrap: wrap;
 
-    outline: solid red 1px;
-
     height: calc(100vh - 80px);
-
-    margin-top: 60px;
 }
 
 main > * {
@@ -27,7 +23,7 @@ main > * {
     flex-basis: 100%;
     flex-shrink: 0;
 
-    height: 120px;
+    height: 140px;
 }
 
 #viewer-items {
@@ -37,10 +33,24 @@ main > * {
     overflow-y: auto;
 }
 
+#slider-container {
+    height: 75px;
+}
+
+#slider {
+    width: 100%;
+}
+
 .leaflet-popup-content h1 {
     font-size: larger;
 }
 
 .hidden {
     display: none;
+}
+
+.noUi-handle {
+    width: 46px !important;
+    background: none !important;
+    cursor: grab;
 }
