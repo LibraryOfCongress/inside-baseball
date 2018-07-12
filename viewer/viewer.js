@@ -140,6 +140,8 @@ function updateItemPreview(item) {
     $$(".title", preview).forEach(elem => (elem.textContent = item.title));
     $(".description", preview).textContent = item.metadata.Description;
 
+    $("img", preview).src = item.imageLarge;
+
     $$("a", preview).forEach(link => (link.href = item.metadata["Digital ID URL"]));
 
     let tbody = $(".metadata-table tbody", preview);

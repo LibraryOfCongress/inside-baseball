@@ -9,6 +9,37 @@ import sys
 import dateparser
 
 
+def load_image_json():
+    with open("images.json", "r") as f:
+        data = json.load(f)
+
+    images = {}
+
+    for image in data:
+        item_url = image.get("itemURL")
+        thumbnail = image.get("imageThumb")
+        large = image.get("imageLarge")
+
+        if not item_url:
+            print("Malformed row:", image, file=sys.stderr)
+            continue
+
+        if not thumbnail and not large:
+            print(f"No images for {item_url}!", image, file=sys.stderr)
+            continue
+        elif not thumbnail and large:
+            thumbnail = large
+        elif not large and thumbnail:
+            large = thumbnail
+
+        images[item_url] = {"imageThumbnail": thumbnail, "imageLarge": large}
+
+    return images
+
+
+IMAGE_JSON = load_image_json()
+
+
 def export_items_as_geojson(db_file, output_file):
     db = sqlite3.connect("file:%s?mode=ro" % db_file, uri=True)
     db.row_factory = sqlite3.Row
@@ -124,6 +155,12 @@ def export_item(db, item):
         "metadata": metadata,
         "id": str(metadata.pop("rowid")),
     }
+
+    item_url = metadata["Digital ID URL"]
+    if item_url not in IMAGE_JSON:
+        print("No images for item", item_url, file=sys.stderr)
+    else:
+        item_properties.update(IMAGE_JSON[item_url])
 
     extracted_dates = extract_dates(metadata.get("Date"))
     if extracted_dates:
