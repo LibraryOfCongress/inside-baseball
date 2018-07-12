@@ -35,3 +35,7 @@ main > * {
 #viewer-items {
     max-width: 30em;
 }
+
+.leaflet-popup-content h1 {
+    font-size: larger;
+}

@@ -14,6 +14,36 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+fetch("InsideBaseball.geojson")
+    .then(response => {
+        return response.json();
+    })
+    .then(data => {
+        L.geoJSON(data, {
+            onEachFeature: (feature, layer) => {
+                let popup = `
+                <h1>${feature.properties.title}</h1>
+
+                <div>${feature.properties.metadata.Description}</div>
+
+                `.trim();
+
+                if (feature.properties.metadata.Copyright) {
+                    popup += `<div><b>Copyright:</b> ${
+                        feature.properties.metadata.Copyright
+                    }</div>`;
+                }
+
+                layer.bindPopup(popup.trim());
+            },
+            pointToLayer: (feature, latlng) => {
+                return L.marker(latlng, {
+                    title: feature.properties.title
+                });
+            }
+        }).addTo(map);
+    });
+
 fetch(
     "https://raw.githubusercontent.com/cageyjames/GeoJSON-Ballparks/master/ballparks.geojson"
 )
