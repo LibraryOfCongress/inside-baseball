@@ -8,7 +8,6 @@ import sys
 
 from csvs_to_sqlite.utils import (
     LoadCsvError,
-    csvs_from_paths,
     load_csv,
     refactor_dataframes,
     table_exists,
@@ -22,7 +21,7 @@ def convert_csv_to_sqlite(csv_filename):
     conn = sqlite3.connect(sqlite_filename)
 
     dataframes = []
-    csvs = csvs_from_paths(csv_filename)
+    csvs = {os.path.splitext(csv_filename)[0]: csv_filename}
 
     for name, path in csvs.items():
         try:

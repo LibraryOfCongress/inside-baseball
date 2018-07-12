@@ -38,7 +38,7 @@ def export_items_as_geojson(db_file, output_file):
         json.dump({"points": list(all_points.values()), "items": all_items}, output_f)
 
 
-MULTI_VALUE_COLUMN_RE = re.compile(r"^(.+)_\d+$")
+MULTI_VALUE_COLUMN_RE = re.compile(r"^(.+)[._]\d+$")
 
 
 def export_item(db, item):
@@ -63,20 +63,10 @@ def export_item(db, item):
         if isinstance(v, list):
             metadata[k] = [i for i in v if i]
 
-    # For our core fields we want to make sure we have a value even if they're
-    # not consistent across all of our items:
-    titles = [metadata.get("Object Name"), metadata.get("Title")]
-    titles.extend(metadata.get("Other Title", []))
-
-    display_titles = list(filter(None, titles))
-    if not display_titles:
-        title = "Row #%d" % metadata["rowid"]
-    else:
-        title = display_titles[0]
-
     all_coords = dict()
 
     for lookup_name in (
+        "Other Title",
         "Creator/Publisher",
         "Subject",
         "Era",
@@ -94,6 +84,8 @@ def export_item(db, item):
 
         if lookup_name == "Creator/Publisher":
             lookup_table = "Creator"
+        elif lookup_name == "Other Title":
+            lookup_table = "Title"
         else:
             lookup_table = lookup_name
 
@@ -113,6 +105,17 @@ def export_item(db, item):
                 all_coords[(lat, lng)] = row["value"]
 
         metadata[lookup_name] = resolved_values
+
+    # For our core fields we want to make sure we have a value even if they're
+    # not consistent across all of our items:
+    titles = [metadata.get("Object Name"), metadata.get("Title")]
+    titles.extend(filter(None, metadata["Other Title"] or []))
+
+    display_titles = list(filter(None, titles))
+    if not display_titles:
+        title = "Row #%d" % metadata["rowid"]
+    else:
+        title = display_titles[0]
 
     return (
         [{"title": v, "latlng": k} for k, v in all_coords.items()],
