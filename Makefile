@@ -18,12 +18,17 @@ InsideBaseball.sqlite: InsideBaseball.csv
 geocode: InsideBaseball.sqlite
 	pipenv run python geocode-locations.py InsideBaseball.sqlite
 
-export: geocode
+InsideBaseball.json: geocode
 	pipenv run python export-json.py InsideBaseball.sqlite
-	mv InsideBaseball.json viewer/
+
+export: InsideBaseball.json
 
 server: geocode
 	pipenv run datasette serve InsideBaseball.sqlite
 
 publish: geocode
 	pipenv run datasette publish now --install=datasette-vega --install=datasette-cluster-map InsideBaseball.sqlite
+
+upload: InsideBaseball.csv InsideBaseball.json InsideBaseball.sqlite
+	cp InsideBaseball.csv InsideBaseball.json InsideBaseball.sqlite viewer/
+	aws --profile=repo s3 sync --acl public-read --exclude=Makefile viewer/ s3://cadams-inside-baseball/
