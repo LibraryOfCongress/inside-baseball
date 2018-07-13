@@ -1,3 +1,5 @@
+/* global L, jQuery, noUiSlider */
+
 let $ = (selector, scope = document) => {
     return scope.querySelector(selector);
 };
@@ -168,7 +170,7 @@ function displayAllItems() {
     displayItems(Object.values(allItems).map(v => v.id));
 }
 
-map.on("click", evt => {
+map.on("click", () => {
     displayAllItems();
     applyVisibilityFilters();
 });
@@ -254,12 +256,12 @@ function applyMapVisibilityFilter(visibleItemIDs) {
 //     map.fitBounds(placeLayer.getBounds(), { animate: true });
 
 let textSearchInput = $("#item-text-search");
-textSearchInput.addEventListener("input", evt => {
+textSearchInput.addEventListener("input", () => {
     applyVisibilityFilters();
 });
 
 function createSlider(element) {
-    noUiSlider.create(slider, {
+    noUiSlider.create(element, {
         start: [startYear, endYear],
         range: {
             min: startYear,
@@ -283,11 +285,11 @@ function createSlider(element) {
     });
 
     let labels = [
-        slider.querySelector('.noUi-handle[data-handle="0"]'),
-        slider.querySelector('.noUi-handle[data-handle="1"]')
+        element.querySelector('.noUi-handle[data-handle="0"]'),
+        element.querySelector('.noUi-handle[data-handle="1"]')
     ];
 
-    slider.noUiSlider.on("update", (values, handle, unencoded) => {
+    element.noUiSlider.on("update", (values, handle) => {
         labels[handle].innerText = values[handle];
 
         startYear = Math.floor(parseInt(values[0], 10) - 1);
