@@ -145,6 +145,8 @@ function updateItemPreview(item) {
     $$("a", preview).forEach(link => (link.href = item.metadata["Digital ID URL"]));
 
     let tbody = $(".metadata-table tbody", preview);
+    removeChildren(tbody);
+
     for (let [field, value] of Object.entries(item.metadata)) {
         if (field == "Description" || !value || value.length < 1) {
             continue;
