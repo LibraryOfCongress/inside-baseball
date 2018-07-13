@@ -6,17 +6,15 @@ main {
     display: flex;
     flex-wrap: wrap;
 
-    height: calc(100vh - 80px);
+    height: calc(100vh - 60px);
 }
 
 main > * {
     flex: 1 1 50%;
 
-    outline: dotted #ccc 1px;
+    padding: .3rem 1.2rem;
 
-    padding: 1rem;
-
-    height: calc(100% - 140px);
+    height: 100%;
 }
 
 #viewer-filters {
@@ -51,6 +49,9 @@ main > * {
 
 .noUi-handle {
     width: 46px !important;
-    background: none !important;
     cursor: grab;
+}
+
+.noUi-handle::before, .noUi-handle::after {
+    display: none;
 }
