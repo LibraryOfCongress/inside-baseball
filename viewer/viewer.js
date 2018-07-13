@@ -200,7 +200,16 @@ function updateItemPreview(item) {
         row.appendChild(th);
 
         let td = document.createElement("td");
-        td.textContent = value;
+        if (field == "Digital ID URL") {
+            let a = document.createElement("a");
+            a.href = value;
+            a.textContent = value;
+            a.target = "_blank";
+            td.appendChild(a);
+        } else {
+            td.textContent = value;
+        }
+
         row.appendChild(td);
 
         tbody.appendChild(row);
