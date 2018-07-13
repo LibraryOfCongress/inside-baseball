@@ -64,8 +64,3 @@ main > * {
 #viewer-item-preview .img-fluid {
     max-height: 50vh;
 }
-
-#viewer-item-preview .item-image-container {
-    margin: 0.6rem;
-    margin-top: 0.3rem;
-}

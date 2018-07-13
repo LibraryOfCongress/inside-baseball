@@ -180,7 +180,17 @@ function updateItemPreview(item) {
     $$(".title", preview).forEach(elem => (elem.textContent = item.title));
     $(".description", preview).textContent = item.metadata.Description;
 
-    $("img", preview).src = item.imageLarge;
+    // Set the image to a 1px GIF to clear its contents so it won't display an
+    // old image if the current one takes a long time to load:
+    $("img", preview).src =
+        "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
+    if (item.imageLarge) {
+        $("img", preview).src = item.imageLarge;
+        $(".item-image-container", preview).classList.remove("hidden");
+    } else {
+        $(".item-image-container", preview).classList.add("hidden");
+    }
 
     $$("a", preview).forEach(link => (link.href = item.metadata["Digital ID URL"]));
 
