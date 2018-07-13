@@ -24,6 +24,9 @@ def load_image_json():
             print("Malformed row:", image, file=sys.stderr)
             continue
 
+        if thumbnail == "&max=100":
+            thumbnail = ""
+
         if not thumbnail and not large:
             print(f"No images for {item_url}!", image, file=sys.stderr)
             continue
