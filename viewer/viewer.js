@@ -17,10 +17,17 @@ let allPoints,
     startYear = 1860,
     endYear = 2018;
 
-let baseballIcon = L.icon({
+let stadiumIcon = L.icon({
     iconUrl: "static/icons/stadium.svg",
     iconSize: [32, 32],
     iconAnchor: [12, 12],
+    popupAnchor: [0, 0]
+});
+
+let baseballCapIcon = L.icon({
+    iconUrl: "static/icons/baseball_cap.svg",
+    iconSize: [26, 17],
+    iconAnchor: [13, 18],
     popupAnchor: [0, 0]
 });
 
@@ -77,6 +84,8 @@ fetch("InsideBaseball.json")
         displayAllItems();
     });
 
+let layerControl = L.control.layers(null).addTo(map);
+
 fetch(
     "https://raw.githubusercontent.com/cageyjames/GeoJSON-Ballparks/master/ballparks.geojson"
 )
@@ -90,14 +99,33 @@ fetch(
                     title = `${props.Ballpark} (${props.Team})`;
 
                 return L.marker(latlng, {
-                    icon: baseballIcon,
+                    icon: stadiumIcon,
                     title: title
                 });
             }
         });
 
-        // Now that we have a layer, we'll add a control for toggling them:
-        L.control.layers(null, { "Present Day Ballparks": ballparksLayer }).addTo(map);
+        layerControl.addOverlay(ballparksLayer, "Present Day Ballparks");
+    });
+
+fetch("teams.geojson")
+    .then(response => {
+        return response.json();
+    })
+    .then(data => {
+        let ballparksLayer = L.geoJSON(data, {
+            pointToLayer: (feature, latlng) => {
+                let props = feature.properties,
+                    title = `${props.Ballpark} (${props.Team})`;
+
+                return L.marker(latlng, {
+                    icon: baseballCapIcon,
+                    title: title
+                });
+            }
+        });
+
+        layerControl.addOverlay(ballparksLayer, "Teams");
     });
 
 map.setView({ lat: 38.8879105, lng: -77.0024652 }, 7);
