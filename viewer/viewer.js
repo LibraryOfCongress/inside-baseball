@@ -18,7 +18,7 @@ let allPoints,
     endYear = 2018;
 
 let baseballIcon = L.icon({
-    iconUrl: "static/icons/baseball-ball-solid.svg",
+    iconUrl: "static/icons/stadium.svg",
     iconSize: [32, 32],
     iconAnchor: [12, 12],
     popupAnchor: [0, 0]
