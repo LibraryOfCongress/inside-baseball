@@ -55,6 +55,7 @@ fetch("InsideBaseball.json")
             marker.bindPopup(title);
             marker.on("click", function(evt) {
                 displayItems(evt.target.options.items);
+                applyVisibilityFilters();
             });
 
             marker.addTo(placeLayer);
@@ -73,7 +74,7 @@ fetch("InsideBaseball.json")
             v.searchText = searchText.join("\n").toLocaleLowerCase();
         });
 
-        displayItems(Object.values(allItems).map(v => v.id));
+        displayAllItems();
     });
 
 fetch(
@@ -134,6 +135,15 @@ function displayItems(itemIDs) {
         itemContainer.appendChild(itemLink);
     });
 }
+
+function displayAllItems() {
+    displayItems(Object.values(allItems).map(v => v.id));
+}
+
+map.on("click", evt => {
+    displayAllItems();
+    applyVisibilityFilters();
+});
 
 function updateItemPreview(item) {
     let preview = $("#viewer-item-preview");
