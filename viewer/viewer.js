@@ -118,7 +118,7 @@ fetch("teams.geojson")
         let ballparksLayer = L.geoJSON(data, {
             pointToLayer: (feature, latlng) => {
                 let props = feature.properties,
-                    title = `${props.Ballpark} (${props.Team})`;
+                    title = props.Teams || props.Stadiums || props.Leagues;
 
                 return L.marker(latlng, {
                     icon: baseballCapIcon,
