@@ -85,4 +85,7 @@ main > * {
 
     background-repeat: no-repeat;
     background-size: cover;
+
+    background-color: #eee;
+    border-radius: 4px;
 }
