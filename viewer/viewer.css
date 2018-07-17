@@ -64,3 +64,25 @@ main > * {
 #viewer-item-preview .img-fluid {
     max-height: 50vh;
 }
+
+.item-listing {
+    padding: 4px;
+    height: 90px;
+    overflow: hidden;
+}
+
+.item-listing > a {
+    display: flex;
+    align-items: center;
+}
+
+.item-listing .thumbnail {
+    flex: 0 0 90px;
+
+    height: 80px;
+    width: 90px;
+    margin: 0 8px 0 0;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+}

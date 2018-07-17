@@ -19,11 +19,10 @@ class ItemViewer {
         this.startYear = 1860;
         this.endYear = 2018;
 
-        this.itemListing = $("#viewer-items > ul");
-
         this.loadData();
         this.loadBallparkLayer();
         this.loadTeamLayer();
+        this.setupItemList();
         this.setupTextSearch();
         this.setupMap();
         this.setupTimeline();
@@ -182,6 +181,16 @@ class ItemViewer {
                 evt.stopPropagation();
                 return false;
             });
+
+            let itemThumbnail = document.createElement("span");
+            itemThumbnail.classList.add("thumbnail");
+            if (item.imageThumbnail) {
+                // Loading is deferred until the image is actually visible:
+                itemThumbnail.dataset.image = item.imageThumbnail;
+                this.itemListingObserver.observe(itemThumbnail);
+            }
+
+            itemLink.insertBefore(itemThumbnail, itemLink.firstChild);
 
             itemContainer.appendChild(itemLink);
         });
@@ -346,6 +355,25 @@ class ItemViewer {
 
             this.applyVisibilityFilters();
         });
+    }
+
+    setupItemList() {
+        this.itemListing = $("#viewer-items > ul");
+
+        this.itemListingObserver = new IntersectionObserver(
+            entries => {
+                entries.filter(i => i.isIntersecting).forEach(entry => {
+                    let target = entry.target;
+                    target.style.backgroundImage = `url(${target.dataset.image})`;
+                    this.itemListingObserver.unobserve(target);
+                });
+            },
+            {
+                root: $("#viewer-items"),
+                rootMargin: "300px",
+                threshold: 0
+            }
+        );
     }
 }
 
