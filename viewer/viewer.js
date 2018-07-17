@@ -270,6 +270,11 @@ class ItemViewer {
             );
         });
 
+        let visibleItemCount = $$(".item-listing:not(.hidden)", this.itemListing)
+            .length;
+
+        $$(".item-count").forEach(elem => (elem.textContent = visibleItemCount));
+
         this.applyMapVisibilityFilter(visibleItemIDs);
     }
 
