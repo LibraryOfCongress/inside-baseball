@@ -31,4 +31,4 @@ publish: geocode
 
 upload: InsideBaseball.csv InsideBaseball.json InsideBaseball.sqlite
 	cp InsideBaseball.csv InsideBaseball.json InsideBaseball.sqlite viewer/
-	aws --profile=repo s3 sync --acl public-read --exclude=Makefile viewer/ s3://cadams-inside-baseball/
+	aws --profile=labs s3 sync --acl public-read --exclude=Makefile viewer/ s3://mappinganamericanpastime/
