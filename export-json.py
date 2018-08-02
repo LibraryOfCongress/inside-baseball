@@ -71,7 +71,11 @@ def export_items_as_geojson(db_file, output_file):
         point["items"] = list(point["items"])
 
     with open(output_file, "w") as output_f:
-        json.dump({"points": list(all_points.values()), "items": all_items}, output_f, indent=4)
+        json.dump(
+            {"points": list(all_points.values()), "items": all_items},
+            output_f,
+            indent=4,
+        )
 
 
 MULTI_VALUE_COLUMN_RE = re.compile(r"^(.+)[._]\d+$")

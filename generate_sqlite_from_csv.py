@@ -8,11 +8,11 @@ import sys
 
 from csvs_to_sqlite.utils import (
     LoadCsvError,
+    drop_table,
     load_csv,
     refactor_dataframes,
     table_exists,
     to_sql_with_foreign_keys,
-    drop_table,
 )
 
 

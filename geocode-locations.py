@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import json
-import re
 import os
 import sqlite3
 import sys
@@ -9,10 +8,9 @@ import sys
 import requests
 from csvs_to_sqlite.utils import table_exists
 from Levenshtein import ratio
-
 from utils import column_exists, normalize_place_name
 
-GEONAMES_API_USERNAME = os.environ.get("GEONAMES_API_USERNAME", "acdha")
+GEONAMES_API_USERNAME = os.environ.get("GEONAMES_API_USERNAME", "")
 
 db = sqlite3.connect(sys.argv[1], isolation_level=None)
 
