@@ -11,7 +11,7 @@ We’d also like to thank our fearless leader, Jstor Labs facilitator Beth Duffo
 
 ## Repo Content ##
 You will find the following in this repo:   
-* “Mapping an American Pastime” application [external link](http://mappinganamericanpastime.s3-website.us-east-2.amazonaws.com/)
+* “Mapping an American Pastime” [application](http://mappinganamericanpastime.s3-website.us-east-2.amazonaws.com/)
 * Data sets including datasette (SQLite) json and csv exports
 * Documentation and diagrams on data provenance, decisions, transformations
 * Wireframes
