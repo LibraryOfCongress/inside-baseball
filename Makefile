@@ -3,8 +3,8 @@ all: export
 clean:
 	rm -f *.sqlite *.csv *-cleaned.xlsx
 
-InsideBaseball.csv: InsideBaseball-raw.csv
-	pipenv run python clean-csv.py InsideBaseball-raw.csv InsideBaseball.csv
+InsideBaseball.csv: data/InsideBaseball-raw.csv
+	pipenv run python clean-csv.py data/InsideBaseball-raw.csv InsideBaseball.csv
 
 InsideBaseball.sqlite: InsideBaseball.csv
 	pipenv run python generate_sqlite_from_csv.py InsideBaseball.csv
