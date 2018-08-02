@@ -18,8 +18,15 @@ The `data/original` folder contains a number of files which are described below.
 
 ### Diagrams
 
--   Various documents that depict the construction and intellectual reality of
-    the metadata mapping and dataset construction.
+Various documents that depict the construction and intellectual reality of the
+metadata mapping and dataset construction. For convenience, the original
+PowerPoint documentation has been converted to PNG:
+
+-   [Relationship Crosswalk](./Inside Baseball Wireframe/Inside Baseball Wireframe.002.png)
+-   [MARC <-> LC JSON mapping detail](./Inside Baseball Wireframe/Inside Baseball Wireframe.003.png)
+-   [MARC <-> LC JSON <-> Dublin Core mapping detail](./Inside Baseball Wireframe/Inside Baseball Wireframe.004.png)
+-   [Dublin Core <-> NMAAHC mapping detail](./Inside Baseball Wireframe/Inside Baseball Wireframe.005.png)
+-   [Dublin Core <-> API mapping detail](./Inside Baseball Wireframe/Inside Baseball Wireframe.006.png)
 
 ### Datasets
 
