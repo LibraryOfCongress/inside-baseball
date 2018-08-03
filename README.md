@@ -14,7 +14,7 @@ their first data-jam and flash build effort.
 
 The LC Labs team and the JSTOR Labs team publicly presented their applications
 at the Inside Baseball Labs Showcase on Friday, July 13th, 2018. The archived
-livestream of the event is here.
+livestream of the event is [here](https://youtu.be/OUZynlvsQSo?t=3m50s).
 
 We’d like to thank first and foremost our data divinator, visiting Archivist
 Julia Hickey, our Library of Congress team members Griff Friedman, UX Designer,
