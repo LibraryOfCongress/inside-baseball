@@ -26,6 +26,11 @@ Fellow Erin Dlott.
 We’d also like to thank our fearless leader, JSTOR Labs facilitator Beth
 Dufford.
 
+# Media
+
+-   [Inside, Inside Baseball: A Look at the Construction of the Dataset Featuring the Smithsonian’s National Museum of African American History and Culture and the Library of Congress Digital Collections](https://blogs.loc.gov/thesignal/2018/07/inside-inside-baseball-a-look-at-the-construction-of-the-dataset-featuring-the-smithsonians-national-museum-of-african-american-history-and-culture-and-the-library-of-congress-digital-collect/)
+-   Livestream archive: [Inside Baseball: Baseball Collections as Data](https://www.youtube.com/watch?v=OUZynlvsQSo)
+
 ## Repo Content
 
 You will find the following in this repo:
