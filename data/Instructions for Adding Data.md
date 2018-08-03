@@ -3,14 +3,14 @@
 Please prepare the following information for entry into the dataset by updating
 the "InsideBaseball-raw.csv" file.
 
--   _Items marked with an asterisk \* are required_
--   Providing data for more than the required fields will increase access and
-    research potential.
--   Note that all data must be released under the same license as the other files
-    in this repository.
+**Note that all data must be released under [the same license](../LICENSE.md) as the other files in this repository. If you are unable to release your data under these terms we cannot accept it but you are welcome to maintain your own repository including our public domain data.**
 
 Please submit a [pull request](https://help.github.com/articles/about-pull-requests/)
 when your additional data is ready to share.
+
+-   _Fields marked with an asterisk \* are required as our data processing pipeline and viewer depend on them_
+-   Providing data for more than the required fields will increase access and
+    research potential.
 
 ## Fields
 
