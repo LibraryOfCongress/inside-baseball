@@ -17,10 +17,6 @@ dateparser = "*"
 black = "*"
 isort = "*"
 "flake8" = "*"
-rope = "*"
-
-[requires]
-python_version = "3.6"
 
 [pipenv]
 allow_prereleases = true
