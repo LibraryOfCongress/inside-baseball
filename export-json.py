@@ -67,8 +67,11 @@ def export_items_as_geojson(db_file, output_file):
                 combined_point["title"] = point["title"]
 
     for point in all_points.values():
-        # Sets are not serializable by the default JSON encoder
-        point["items"] = list(point["items"])
+        # Sets are not serializable by the default JSON encoder so we'll
+        # convert them to a list and sort it to minimize diff noise:
+        points = list(point["items"])
+        points.sort(key=lambda i: int(i))
+        point["items"] = points
 
     with open(output_file, "w") as output_f:
         json.dump(
