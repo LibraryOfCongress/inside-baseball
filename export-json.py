@@ -201,7 +201,7 @@ def extract_dates(raw_input):
         if guess:
             start_year, end_year = guess
     else:
-        chunks = re.split("\s*-\s*", d, maxsplit=1)
+        chunks = re.split(r"\s*-\s*", d, maxsplit=1)
 
         for guess in map(guess_years_from_date_string, chunks):
             if not guess:

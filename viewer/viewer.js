@@ -128,7 +128,10 @@ class ItemViewer {
                     }
                 });
 
-                this.layerControl.addOverlay(ballparksLayer, "Present Day Ballparks");
+                this.layerControl.addOverlay(
+                    ballparksLayer,
+                    "Present Day Ballparks"
+                );
             });
     }
 
@@ -141,7 +144,8 @@ class ItemViewer {
                 let ballparksLayer = L.geoJSON(data, {
                     pointToLayer: (feature, latlng) => {
                         let props = feature.properties,
-                            title = props.Teams || props.Stadiums || props.Leagues;
+                            title =
+                                props.Teams || props.Stadiums || props.Leagues;
 
                         return L.marker(latlng, {
                             icon: this.baseballCapIcon,
@@ -217,7 +221,9 @@ class ItemViewer {
             $(".item-image-container", preview).classList.add("hidden");
         }
 
-        $$("a", preview).forEach(link => (link.href = item.metadata["Digital ID URL"]));
+        $$("a", preview).forEach(
+            link => (link.href = item.metadata["Digital ID URL"])
+        );
 
         let tbody = $(".metadata-table tbody", preview);
         removeChildren(tbody);
@@ -258,7 +264,9 @@ class ItemViewer {
         let visibleItems = Object.values(this.allItems)
             .filter(item => item.searchText.indexOf(searchText) > -1)
             .filter(
-                item => item.startYear >= this.startYear && item.endYear <= this.endYear
+                item =>
+                    item.startYear >= this.startYear &&
+                    item.endYear <= this.endYear
             )
             .map(item => item.id);
 
@@ -279,10 +287,14 @@ class ItemViewer {
             );
         });
 
-        let visibleItemCount = $$(".item-listing:not(.hidden)", this.itemListing)
-            .length;
+        let visibleItemCount = $$(
+            ".item-listing:not(.hidden)",
+            this.itemListing
+        ).length;
 
-        $$(".item-count").forEach(elem => (elem.textContent = visibleItemCount));
+        $$(".item-count").forEach(
+            elem => (elem.textContent = visibleItemCount)
+        );
 
         this.applyMapVisibilityFilter(visibleItemIDs);
     }
@@ -294,7 +306,8 @@ class ItemViewer {
 
         this.allPlaceMarkers.forEach(marker => {
             let isVisible =
-                marker.options.items.filter(i => visibleIDSet.has(i)).length > 0;
+                marker.options.items.filter(i => visibleIDSet.has(i)).length >
+                0;
 
             if (isVisible) {
                 this.placeLayer.addLayer(marker);
@@ -362,11 +375,15 @@ class ItemViewer {
 
         this.itemListingObserver = new IntersectionObserver(
             entries => {
-                entries.filter(i => i.isIntersecting).forEach(entry => {
-                    let target = entry.target;
-                    target.style.backgroundImage = `url(${target.dataset.image})`;
-                    this.itemListingObserver.unobserve(target);
-                });
+                entries
+                    .filter(i => i.isIntersecting)
+                    .forEach(entry => {
+                        let target = entry.target;
+                        target.style.backgroundImage = `url(${
+                            target.dataset.image
+                        })`;
+                        this.itemListingObserver.unobserve(target);
+                    });
             },
             {
                 root: $("#viewer-items"),

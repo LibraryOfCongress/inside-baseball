@@ -19,15 +19,15 @@
 	<circle class="st2" cx="83.7" cy="112.9" r="10.7"/>
 	<path class="st0" d="M96.1,148.2"/>
 	<path class="st0" d="M69.1,148.2"/>
-	
+
 		<rect x="59.1" y="88.4" transform="matrix(0.7071 0.7071 -0.7071 0.7071 104.3399 -26.0927)" class="st0" width="49.1" height="49.1"/>
-	
+
 		<rect x="76.5" y="74" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -32.9193 82.9473)" class="st2" width="14.4" height="14.4"/>
-	
+
 		<rect x="76.5" y="137.4" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -77.7355 101.5108)" class="st2" width="14.4" height="14.4"/>
-	
+
 		<rect x="108.2" y="105.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -46.0457 114.6372)" class="st2" width="14.4" height="14.4"/>
-	
+
 		<rect x="44.6" y="105.7" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -64.6526 69.716)" class="st2" width="14.4" height="14.4"/>
 	<circle class="st2" cx="83.1" cy="112.9" r="10.1"/>
 </g>
