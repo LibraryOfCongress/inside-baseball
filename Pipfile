@@ -14,9 +14,6 @@ python-levenshtein = "*"
 dateparser = "*"
 
 [dev-packages]
-black = "*"
+black = "==19.3b0"
 isort = "*"
 "flake8" = "*"
-
-[pipenv]
-allow_prereleases = true

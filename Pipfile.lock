@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "392ece12b1bffc55d86a8989ce6f81689a9272893bb3786658bb74218f4e1f81"
+            "sha256": "4833e1824368095d9b4204dd921c0c5693a6cda17c2851b380e34a9cc69ee609"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -393,10 +393,9 @@
         },
         "tzlocal": {
             "hashes": [
-                "sha256:27d58a0958dc884d208cdaf45ef5892bf2a57d21d9611f2ac45e51f1973e8cab",
-                "sha256:f124f198e5d86b3538b140883472beaa82d2c0efc0cd9694dfdbe39079e22e69"
+                "sha256:4ebeb848845ac898da6519b9b31879cf13b6626f7184c496037b818e238f2c4e"
             ],
-            "version": "==2.0.0b1"
+            "version": "==1.5.1"
         },
         "ujson": {
             "hashes": [
