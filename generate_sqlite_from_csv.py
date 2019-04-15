@@ -53,7 +53,7 @@ def convert_csv_to_sqlite(csv_filename):
                 foreign_keys[column_name] = (mapped, "value")
 
     # Now we have loaded the dataframes, we can refactor them
-    refactored = refactor_dataframes(conn, dataframes, foreign_keys)
+    refactored = refactor_dataframes(conn, dataframes, foreign_keys, False)
 
     for df in refactored:
         # This is a bit trickier because we need to
