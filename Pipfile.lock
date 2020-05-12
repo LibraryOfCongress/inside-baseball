@@ -104,10 +104,10 @@
         },
         "datasette-cluster-map": {
             "hashes": [
-                "sha256:ef7d06094a39c5a8997f5dd822923c89cdcf806dd752c036ac5ebdee14c61cfd"
+                "sha256:555c5b317607a1562d21dc5a0400ed0ecfadb8baa59ba9b54487dd6430c491f1"
             ],
             "index": "pypi",
-            "version": "==0.5"
+            "version": "==0.9.1"
         },
         "datasette-vega": {
             "hashes": [
