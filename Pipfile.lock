@@ -118,11 +118,11 @@
         },
         "dateparser": {
             "hashes": [
-                "sha256:983d84b5e3861cb0aa240cad07f12899bb10b62328aae188b9007e04ce37d665",
-                "sha256:e1eac8ef28de69a554d5fcdb60b172d526d61924b1a40afbbb08df459a36006b"
+                "sha256:b8ad97a909c3466d8d64a13d524914e85a15cc0b3ad915dd80c12f189a652152",
+                "sha256:cfa0db2df93903406ca867fd922ac4f482a5fb162356f31d2d7a3012fa5f0d14"
             ],
             "index": "pypi",
-            "version": "==0.7.2"
+            "version": "==0.7.5"
         },
         "dbfread": {
             "hashes": [
