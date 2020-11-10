@@ -1,14 +1,14 @@
 repos:
     - repo: https://github.com/pre-commit/mirrors-isort
-      rev: v4.3.17
+      rev: v5.6.4
       hooks:
           - id: isort
     - repo: https://github.com/ambv/black
-      rev: 19.3b0
+      rev: 20.8b1
       hooks:
           - id: black
     - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v2.1.0
+      rev: v3.3.0
       hooks:
           - id: check-byte-order-marker
           - id: trailing-whitespace
@@ -25,12 +25,12 @@ repos:
           - id: check-ast
           - id: debug-statements
     - repo: https://github.com/prettier/prettier
-      rev: 1.16.4
+      rev: 2.1.2
       hooks:
           - id: prettier
             files: \.(css|less|scss|ts|tsx|graphql|gql|js|jsx|md)$
     - repo: https://github.com/pre-commit/mirrors-eslint
-      rev: v5.16.0
+      rev: v7.13.0-1
       hooks:
           - id: eslint
             additional_dependencies:
@@ -46,6 +46,6 @@ repos:
                 - stylelint-config-prettier@5.0.0
                 - stylelint-config-recommended@2.2.0
     - repo: https://gitlab.com/pycqa/flake8
-      rev: 3.7.7
+      rev: 3.8.4
       hooks:
           - id: flake8
